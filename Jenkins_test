@@ -24,9 +24,6 @@ pipeline {
            }
            stage ('Deploy to prod') {
              steps {
-               timeout(time:5, unit:'DAYS'){
-                 input message:'Approve Prod deployment'
-               }
                bat "COPY /Y webapp\\target\\*.war C:\\Projects\\apache-tomcat-prodact\\webapps"
               } 
           }       
