@@ -16,12 +16,14 @@ pipeline {
          parallel{
            stage ('Deploy to Staging'){
              steps {
-               bat "COPY /Y webapp\\target\\*.war C:\\Projects\\apache-tomcat-staging\\webapps"
+               echo "COPY /Y webapp\\target\\*.war C:\\Projects\\apache-tomcat-staging\\webapps"
+               build job:'deploy_to_staging'
              }
            }
            stage ('Deploy to prod') {
              steps {
-               bat "COPY /Y webapp\\target\\*.war C:\\Projects\\apache-tomcat-prodact\\webapps"
+               echo "COPY /Y webapp\\target\\*.war C:\\Projects\\apache-tomcat-prodact\\webapps"
+               build job:'deploy_to_prod'
              }     
            }
          }
