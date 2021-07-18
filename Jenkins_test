@@ -13,7 +13,7 @@ pipeline {
          }
        }
        stage ('Deployments') {
-         parallel{
+  
            stage ('Deploy to Staging'){
              steps {
                echo "COPY /Y webapp\\target\\*.war C:\\Projects\\apache-tomcat-staging\\webapps"
@@ -23,8 +23,11 @@ pipeline {
            stage ('Deploy to prod') {
              steps {
                echo "COPY /Y webapp\\target\\*.war C:\\Projects\\apache-tomcat-prodact\\webapps"
+               timeout(time:5, unit:'DAYS'){
+                 input message:'Approve Prod deployment'
+               }
                build job:'deploy_to_prod'
-             }     
+                
            }
          }
        }
