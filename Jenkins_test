@@ -12,7 +12,7 @@ pipeline {
            }
          }
        }
-       stage ('Deployments') {
+
   
            stage ('Deploy to Staging'){
              steps {
@@ -28,7 +28,7 @@ pipeline {
                }
                build job:'deploy_to_prod'
                 
-           }
+           
          }
        }
     }
